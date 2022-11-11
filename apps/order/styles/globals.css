@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+div[id$="_header"] {
+  font-family: "Montagu Slab", serif;
+  font-weight: 400;
+  @apply mx-4 mt-5 border-b-2 border-slate-400 border-opacity-60 text-center text-2xl tracking-[5px];
+}
+
+.sticky_navbar_box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(100vh - 70px);
+}
