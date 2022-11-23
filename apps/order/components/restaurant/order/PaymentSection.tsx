@@ -13,10 +13,11 @@ type Props = {
   paymentMethod: string;
   setPaymentMethod: (paymentMethod: string) => void;
   cartCtx: cartCtxModel;
-  handleSubmit: (e: React.MouseEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: React.MouseEvent) => void;
   comment: string;
   errorMsg: string;
   setErrorMsg: (msg: string) => void;
+  isLoading: boolean;
 };
 
 function PaymentSection({
@@ -27,6 +28,7 @@ function PaymentSection({
   comment,
   errorMsg,
   setErrorMsg,
+  isLoading,
 }: Props) {
   return (
     <div className="my-8">
@@ -122,6 +124,7 @@ function PaymentSection({
           disabled={false}
           handleSubmit={handleSubmit}
           errorMsg={errorMsg}
+          isLoading={isLoading}
         />
       )}
     </div>

@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 type Props = {
   totalAmount: number;
   disabled: boolean;
-  handleSubmit?: (e: React.MouseEvent<HTMLInputElement>) => void;
+  handleSubmit?: (e: React.MouseEvent) => void;
   isLoading?: boolean;
   errorMsg?: string;
 };

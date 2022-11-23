@@ -14,7 +14,7 @@ export default async function handler(
         const { items } = req.body;
 
         const getAmountToPay = items.reduce(
-          (prev: number, cur: itemModel) => prev + cur.price,
+          (prev: number, cur: itemModel) => prev + cur.price * cur.amount!,
           0
         );
 

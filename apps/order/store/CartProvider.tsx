@@ -7,10 +7,7 @@ const defaultCartState = {
   totalAmount: 0,
 };
 
-const cartReducer = (
-  state: React.MouseEvent<HTMLInputElement>,
-  action: any
-) => {
+const cartReducer = (state: any, action: any) => {
   if (action.type === "ADD") {
     const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
@@ -61,6 +58,14 @@ const cartReducer = (
       totalAmount: updatedTotalAmount,
     };
   }
+
+  if (action.type === "REMOVE") {
+    return {
+      items: [],
+      totalAmount: 0,
+    };
+  }
+
   return defaultCartState;
 };
 
@@ -78,11 +83,16 @@ function CartProvider(props: any) {
     dispatchCartAction({ type: "REMOVE", id: id });
   };
 
+  const emptyCart = () => {
+    dispatchCartAction({ type: "EMPTY_CART" });
+  };
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    emptyCart: emptyCart,
   };
 
   return (

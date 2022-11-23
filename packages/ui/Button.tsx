@@ -1,7 +1,7 @@
 type Props = {
   buttonText: string;
   buttonType: "orderButton" | "primary" | "secondary";
-  onClick: (e: React.MouseEvent<HTMLInputElement>) => void;
+  onClick: (e: React.MouseEvent) => void;
   type?: "button" | "submit";
   disabled?: true | false;
   buttonSize: "sm" | "md";

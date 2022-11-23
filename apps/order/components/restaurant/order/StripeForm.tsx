@@ -65,12 +65,14 @@ const CheckoutForm = ({ cartCtx, comment, errorMsg, setErrorMsg }: Props) => {
         setIsLoading(false);
 
         if (response.data.status === 201) {
-          router.push(`/${restaurantName}/${tableNr}/order/completed/123`);
+          router.push(
+            `/${restaurantName}/${tableNr}/order/${response.data.data[0].id}`
+          );
         } else {
           setErrorMsg(response.data.error);
         }
-      } catch (e: any) {
-        setErrorMsg(e);
+      } catch (error: any) {
+        setErrorMsg(error.message);
       }
     }
   };
