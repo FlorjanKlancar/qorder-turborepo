@@ -8,7 +8,7 @@ type Props = {
 
 function CompletedCard({ item }: Props) {
   return (
-    <li key={item.items.id} className="flex py-6">
+    <li key={item.items.id} className="flex items-center py-6">
       <div className="relative h-24 w-44 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
         <Image
           src={item.items.picture}
@@ -24,16 +24,20 @@ function CompletedCard({ item }: Props) {
             <h3>
               <a>{item.items.title}</a>
             </h3>
-            <p className="ml-4">{item.items.price.toFixed(2)}€</p>
+            <p className="ml-4">
+              {(item.items.price * item.amount).toFixed(2)}€
+            </p>
           </div>
           <p className="mt-1 hidden text-sm text-gray-500 sm:flex">
             {item.items.description}
           </p>
         </div>
-        <div className="flex flex-1 items-end justify-between text-sm">
-          <p className="text-gray-500">
+        <div className="flex flex-1 items-end justify-between">
+          <p className="mt-2 text-base font-semibold ">
             {item.amount}x
-            <span className="ml-1">{item.items.price.toFixed(2)}€</span>
+            <span className="ml-1 text-default">
+              {item.items.price.toFixed(2)}€
+            </span>
           </p>
         </div>
       </div>

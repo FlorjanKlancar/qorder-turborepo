@@ -78,7 +78,7 @@ function OrderingLayout({
                   query: { restaurantName, tableNr },
                 }}
               >
-                <div className="btn flex w-48 justify-between border-slate-400 bg-default">
+                <div className="btn flex w-48 justify-between border-default bg-default">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-default">
                     {cartCtx.items.length}
                   </div>

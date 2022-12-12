@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import animationData from "../../../../../public/assets/lottie/waiter.json";
 import Confetti from "react-confetti";
@@ -13,6 +13,7 @@ import { orderDetailsModel } from "../../../../../types/orderDetailsModel";
 import InvoiceLayout from "../../../../../components/layout/InvoiceLayout";
 import CompletedCard from "../../../../../components/restaurant/order/CompletedCard";
 import { motion } from "framer-motion";
+import CartContext from "../../../../../store/cart-context";
 
 type Props = {
   restaurant: restaurantModel;
@@ -37,10 +38,12 @@ function CompletedPaymentComponent({
   orderResponse: orderDetails,
 }: Props) {
   const [confetti, setConfetti] = useState<React.ReactNode>();
+  const cartCtx = useContext(CartContext);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     setConfetti(<RenderConfetti />);
+    cartCtx.emptyCart();
   }, []);
 
   return (

@@ -13,7 +13,7 @@ function OrderInTotal({ cartCtx }: Props) {
         <h2>Prices in EUR, incl. taxes</h2>
       </div>
 
-      <div className="rounded-xl border-2 border-slate-400 border-opacity-60 bg-white shadow-xl">
+      <div className="rounded-xl bg-white shadow-xl">
         <ul>
           <div className="my-3">
             {cartCtx.items.map((item: itemModel, i: number) => (

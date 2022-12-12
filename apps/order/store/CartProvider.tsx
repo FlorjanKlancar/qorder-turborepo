@@ -59,7 +59,7 @@ const cartReducer = (state: any, action: any) => {
     };
   }
 
-  if (action.type === "REMOVE") {
+  if (action.type === "EMPTY_CART") {
     return {
       items: [],
       totalAmount: 0,
