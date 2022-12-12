@@ -79,13 +79,13 @@ function CompletedPaymentComponent({
         transition={{ duration: 0.8 }}
         className="pb-24 xl:pb-12"
       >
-        <section className="flex flex-col rounded-lg bg-white px-4">
+        <section className="flex flex-col rounded-lg bg-white px-4 shadow-xl">
           <div id="order_header">
             <h1>Order in total</h1>
           </div>
           <div className="mt-3 flex justify-between capitalize">
             {orderDetails.customerComment ? (
-              <div className="w-2/3">
+              <div className="mt-4 w-2/3">
                 <span className="font-semibold ">Customer comment:</span>{" "}
                 {orderDetails.customerComment}
               </div>
