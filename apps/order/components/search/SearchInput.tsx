@@ -22,12 +22,15 @@ function SearchField({ searchInputField, setSearchInputField }: Props) {
           value={searchInputField}
           onChange={(e) => setSearchInputField(e.target.value)}
         />
-
         <div className="p-4 xl:p-2">
-          <XMarkIcon
-            className="h-5 w-5 cursor-pointer text-gray-500"
-            onClick={() => setSearchInputField("")}
-          />
+          {searchInputField.length ? (
+            <XMarkIcon
+              className="h-5 w-5 cursor-pointer text-gray-500"
+              onClick={() => setSearchInputField("")}
+            />
+          ) : (
+            <></>
+          )}{" "}
         </div>
       </div>
     </div>

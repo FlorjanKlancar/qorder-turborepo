@@ -7,8 +7,8 @@ export const useItems = () => {
       const response = await supabase.from("items").select("*");
 
       return response.data;
-    } catch (e: any) {
-      console.error(e);
+    } catch (error: any) {
+      console.error(error);
     }
   });
 };

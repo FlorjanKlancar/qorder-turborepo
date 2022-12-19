@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CartContext from "../../../store/cart-context";
 import { itemModel } from "../../../types/itemModel";
 import PaymentSection from "./PaymentSection";
@@ -12,19 +12,58 @@ import {
   PlusCircleIcon,
 } from "@heroicons/react/24/outline";
 import OrderInTotal from "./OrderInTotal";
+import axios from "axios";
 
 function OrderList() {
   const router = useRouter();
   const cartCtx = useContext(CartContext);
   const [comment, setComment] = useState({ isShown: false, comment: "" });
-  const [paymentMethod, setPaymentMethod] = useState<string>("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const restaurantName = router.query.restaurantName;
   const tableNr = router.query.tableNr;
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
+
+    if (!paymentMethod.length) {
+      setErrorMsg("You have to select payment method!");
+      return;
+    }
+
+    setIsLoading(true);
+
+    if (paymentMethod === "cash") {
+      try {
+        const response = await axios.post("/api/insertOrder", {
+          items: cartCtx.items,
+          totalAmount: cartCtx.totalAmount,
+          paymentType: paymentMethod,
+          customerComment: comment.comment,
+          customerTip: 0,
+          tableNumber: tableNr,
+          status: "pending",
+        });
+        setIsLoading(false);
+
+        if (response.data.status === 201) {
+          router.push(
+            `/${restaurantName}/${tableNr}/order/${response.data.data[0].id}`
+          );
+        } else {
+          setErrorMsg(response.data.error);
+        }
+      } catch (error: any) {
+        setErrorMsg(error.message);
+      }
+    }
   };
+
+  useEffect(() => {
+    paymentMethod.length && setErrorMsg("");
+  }, [paymentMethod]);
 
   return (
     <div className="px-4 sm:px-16 md:px-32 lg:px-48 xl:px-96">
@@ -144,6 +183,9 @@ function OrderList() {
             paymentMethod={paymentMethod}
             setPaymentMethod={setPaymentMethod}
             comment={comment.comment}
+            errorMsg={errorMsg}
+            setErrorMsg={setErrorMsg}
+            isLoading={isLoading}
           />
         </>
       ) : (

@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const stripe = require("stripe")(process.env.NEXT_STRIPE_SK);
+  const stripe = require("stripe")(process.env.STRIPE_SK);
 
   switch (req.method) {
     case "POST":
@@ -14,7 +14,7 @@ export default async function handler(
         const { items } = req.body;
 
         const getAmountToPay = items.reduce(
-          (prev: number, cur: itemModel) => prev + cur.price,
+          (prev: number, cur: itemModel) => prev + cur.price * cur.amount!,
           0
         );
 

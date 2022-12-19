@@ -1,10 +1,13 @@
 import React from "react";
+import { Button } from "ui";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {
   totalAmount: number;
   disabled: boolean;
-  handleSubmit?: (e: any) => void;
+  handleSubmit?: (e: React.MouseEvent) => void;
   isLoading?: boolean;
+  errorMsg?: string;
 };
 
 function OrderButton({
@@ -12,16 +15,35 @@ function OrderButton({
   disabled,
   handleSubmit,
   isLoading,
+  errorMsg,
 }: Props) {
   return (
-    <button
-      type="submit"
-      onClick={handleSubmit ? handleSubmit : () => {}}
-      className="btn mt-4 w-full border-default/80 bg-default/90 text-white hover:border-default hover:bg-default"
-      disabled={disabled || isLoading ? true : false}
-    >
-      {!isLoading ? `Order now (${totalAmount.toFixed(2)}€)` : "Processing..."}
-    </button>
+    <>
+      <motion.div
+        initial={{
+          x: 0,
+        }}
+        animate={{
+          x: errorMsg ? [100, 0, 100, 0] : 0,
+        }}
+        transition={{ duration: 1 }}
+      >
+        <div className="mt-4 flex w-full">
+          <Button
+            buttonSize="md"
+            buttonText={
+              !isLoading
+                ? `Order now (${totalAmount.toFixed(2)}€)`
+                : "Processing..."
+            }
+            disabled={disabled || isLoading || errorMsg ? true : false}
+            type="submit"
+            buttonType="orderButton"
+            onClick={handleSubmit ? handleSubmit : () => {}}
+          />
+        </div>
+      </motion.div>
+    </>
   );
 }
 

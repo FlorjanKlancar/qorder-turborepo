@@ -12,8 +12,8 @@ export const useRestaurantInfo = (restaurantQuery: string) => {
           .eq("queryName", restaurantQuery);
 
         return response.data;
-      } catch (e: any) {
-        console.error(e);
+      } catch (error: any) {
+        console.error(error);
       }
     },
     {

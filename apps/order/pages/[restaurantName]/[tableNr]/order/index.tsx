@@ -3,7 +3,7 @@ import React from "react";
 import OrderingLayout from "../../../../components/layout/OrderingLayout";
 import RestaurantOrderPage from "../../../../components/restaurant/RestaurantOrderPage";
 import { restaurantModel } from "../../../../types/restaurantModel";
-import { checkIfRestaurantExists } from "../../../../utils/checkIfRestaurantExists";
+import { checkIfRestaurantExists } from "../../../../utils/utilityFunctions";
 
 type Props = {
   restaurant: restaurantModel;

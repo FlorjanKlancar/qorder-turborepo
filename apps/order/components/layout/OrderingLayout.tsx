@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { ReactNode, useContext } from "react";
-import BottomNavigation from "../navigation/BottomNavigation";
 import RestaurantHeader from "../restaurant/RestaurantHeader";
 import SearchField from "../search/SearchInput";
 import { motion } from "framer-motion";
@@ -13,6 +12,7 @@ import CartContext from "../../store/cart-context";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { restaurantModel } from "../../types/restaurantModel";
+import Footer from "../navigation/Footer";
 
 type Props = {
   children: ReactNode;
@@ -41,7 +41,7 @@ function OrderingLayout({
   const cartCtx = useContext(CartContext);
 
   return (
-    <div>
+    <>
       <Head>
         <title>
           {errorTitle ?? !isOrderingView
@@ -78,7 +78,7 @@ function OrderingLayout({
                   query: { restaurantName, tableNr },
                 }}
               >
-                <div className="btn flex w-48 justify-between border-slate-400 bg-default">
+                <div className="btn flex w-48 justify-between border-default bg-default">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg text-default">
                     {cartCtx.items.length}
                   </div>
@@ -117,10 +117,9 @@ function OrderingLayout({
         )}
         <div>{children}</div>
       </motion.div>
-      <div className="w-1/3 xl:hidden">
-        <BottomNavigation />
-      </div>
-    </div>
+
+      <Footer />
+    </>
   );
 }
 

@@ -13,8 +13,11 @@ type Props = {
   paymentMethod: string;
   setPaymentMethod: (paymentMethod: string) => void;
   cartCtx: cartCtxModel;
-  handleSubmit: (e: any) => void;
+  handleSubmit: (e: React.MouseEvent) => void;
   comment: string;
+  errorMsg: string;
+  setErrorMsg: (msg: string) => void;
+  isLoading: boolean;
 };
 
 function PaymentSection({
@@ -23,6 +26,9 @@ function PaymentSection({
   cartCtx,
   handleSubmit,
   comment,
+  errorMsg,
+  setErrorMsg,
+  isLoading,
 }: Props) {
   return (
     <div className="my-8">
@@ -30,10 +36,33 @@ function PaymentSection({
         <h2>Payment method</h2>
       </div>
 
+      {errorMsg.length ? (
+        <div className="alert alert-error my-3 shadow-lg">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 flex-shrink-0 stroke-current"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>{errorMsg}</span>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+
       <div className="grid grid-cols-2 gap-3">
         <button
           type="button"
-          className={`btn btn-ghost gap-2 border-slate-400 ${
+          className={`btn-ghost btn gap-2 border-slate-400 ${
             paymentMethod === "cash"
               ? "border-default/80 hover:border-default/90 hover:bg-slate-300  hover:text-default"
               : ""
@@ -57,7 +86,7 @@ function PaymentSection({
 
         <button
           type="button"
-          className={`btn btn-ghost gap-2 border-slate-400 ${
+          className={`btn-ghost btn gap-2 border-slate-400 ${
             paymentMethod === "card"
               ? "border-default/80 hover:border-default/90 hover:bg-slate-300  hover:text-default"
               : ""
@@ -79,15 +108,23 @@ function PaymentSection({
           <CreditCardIcon className="h-6 w-6" />
         </button>
       </div>
+
       {paymentMethod === "card" ? (
         <div className="mt-3">
-          <StripeForm cartCtx={cartCtx} comment={comment} />
+          <StripeForm
+            cartCtx={cartCtx}
+            comment={comment}
+            errorMsg={errorMsg}
+            setErrorMsg={setErrorMsg}
+          />
         </div>
       ) : (
         <OrderButton
           totalAmount={cartCtx.totalAmount}
           disabled={false}
           handleSubmit={handleSubmit}
+          errorMsg={errorMsg}
+          isLoading={isLoading}
         />
       )}
     </div>

@@ -13,6 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@types/react-lottie": "^1.2.6",
     "eslint-config-custom": "*",
     "prettier": "latest",
     "turbo": "^1.6.3"
@@ -31,5 +32,8 @@
     "*.json": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "react-use": "^17.4.0"
   }
 }

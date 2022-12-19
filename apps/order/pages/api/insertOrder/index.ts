@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { itemModel } from "../../../types/itemModel";
 import { supabase } from "../../../utils/supabaseClient";
+import { supabaseService } from "../../../utils/supabaseService";
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,7 +21,7 @@ export default async function handler(
           status,
         } = req.body;
 
-        const response: any = await supabase
+        const response = await supabaseService
           .from("orders")
           .insert({
             totalAmount,
@@ -37,9 +38,9 @@ export default async function handler(
         }
 
         items.forEach(async (item: itemModel) => {
-          await supabase.from("itemsOnOrder").insert({
+          await supabaseService.from("itemsOnOrder").insert({
             itemId: item.id,
-            orderId: response.data[0].id,
+            orderId: response.data![0].id,
             amount: item.amount,
           });
         });

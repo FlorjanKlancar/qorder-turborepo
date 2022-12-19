@@ -45,7 +45,7 @@ function MainSection({ searchInputField }: Props) {
     <main className="flex flex-col px-4 sm:px-16 md:px-32 lg:px-48 xl:px-96">
       {Object.keys(groupedItems).map((key: string, i: number) => (
         <div key={i}>
-          <div id={`${key.toLowerCase()}_header`} key={i}>
+          <div id={`${key.toLowerCase()}_header`} className="mx-4" key={i}>
             {key}
           </div>
           <div className="mt-3 flex flex-col space-y-5 px-4 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0 2xl:grid-cols-3">

@@ -19,20 +19,21 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PK!);
 type Props = {
   cartCtx: cartCtxModel;
   comment: string;
+  errorMsg: string;
+  setErrorMsg: (msg: string) => void;
 };
 
-const CheckoutForm = ({ cartCtx, comment }: Props) => {
+const CheckoutForm = ({ cartCtx, comment, errorMsg, setErrorMsg }: Props) => {
   const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const restaurantName = router.query.restaurantName;
   const tableNr = router.query.tableNr;
 
-  const handleSubmit = async (event: any) => {
-    // We don't want to let default form submission happen here,
-    // which would refresh the page.
-    event.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setIsLoading(true);
 
     if (!stripe || !elements) {
@@ -48,17 +49,31 @@ const CheckoutForm = ({ cartCtx, comment }: Props) => {
     });
 
     if (result.error) {
-      // Show error to your customer (for example, payment details incomplete)
+      setErrorMsg(result.error.message!);
+      setIsLoading(false);
     } else {
-      const response = await axios.post("/api/insertOrder", {
-        items: cartCtx.items,
-        totalAmount: cartCtx.totalAmount,
-        paymentType: "card",
-        customerComment: comment,
-        customerTip: 0,
-        tableNumber: tableNr,
-        status: "pending",
-      });
+      try {
+        const response = await axios.post("/api/insertOrder", {
+          items: cartCtx.items,
+          totalAmount: cartCtx.totalAmount,
+          paymentType: "card",
+          customerComment: comment,
+          customerTip: 0,
+          tableNumber: tableNr,
+          status: "pending",
+        });
+        setIsLoading(false);
+
+        if (response.data.status === 201) {
+          router.push(
+            `/${restaurantName}/${tableNr}/order/${response.data.data[0].id}`
+          );
+        } else {
+          setErrorMsg(response.data.error);
+        }
+      } catch (error: any) {
+        setErrorMsg(error.message);
+      }
     }
   };
 
@@ -75,7 +90,12 @@ const CheckoutForm = ({ cartCtx, comment }: Props) => {
   );
 };
 
-export default function StripeForm({ cartCtx, comment }: Props) {
+export default function StripeForm({
+  cartCtx,
+  comment,
+  errorMsg,
+  setErrorMsg,
+}: Props) {
   const [clientSecret, setClientSecret] = useState<string>("");
 
   const getClientSecret = async () => {
@@ -92,13 +112,17 @@ export default function StripeForm({ cartCtx, comment }: Props) {
   if (!clientSecret.length) return <CardSkeleton />;
 
   const options = {
-    // passing the client secret obtained from the server
     clientSecret: clientSecret,
   };
 
   return (
     <Elements stripe={stripePromise} options={options}>
-      <CheckoutForm comment={comment} cartCtx={cartCtx} />
+      <CheckoutForm
+        comment={comment}
+        cartCtx={cartCtx}
+        errorMsg={errorMsg}
+        setErrorMsg={setErrorMsg}
+      />
     </Elements>
   );
 }
