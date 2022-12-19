@@ -48,18 +48,8 @@ function CompletedPaymentComponent({
 
   return (
     <InvoiceLayout restaurant={restaurant}>
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100vh",
-          height: "100vh",
-        }}
-      >
-        {confetti}
-      </div>
-      <section className="mt-4 items-center text-center text-xl font-medium">
+      <div className="absolute top-0 left-0 h-screen w-screen">{confetti}</div>
+      <section className="mt-8 items-center text-center text-xl font-medium sm:mt-4">
         Thank you for your order on{" "}
         <span className="capitalize text-default underline decoration-default underline-offset-4">
           table {orderDetails.tableNumber}
