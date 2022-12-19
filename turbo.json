@@ -2,13 +2,14 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "dist/**",
-        ".next/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"],
+      "env": ["STRIPE_PK", "STRIPE_SK"]
+    },
+    "order#build": {
+      "dependsOn": ["^build"],
+      "env": ["STRIPE_PK", "STRIPE_SK"],
+      "outputs": [".next/**"]
     },
     "lint": {
       "outputs": []
@@ -17,10 +18,11 @@
       "cache": false
     }
   },
-  "globalDependencies": [
-    "NEXT_PUBLIC_SUPABASE_URL",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+  "globalEnv": [
+    "SUPABASE_URL",
+    "SUPABASE_ANON_KEY",
     "SUPABASE_SERVICE_ROLE",
-    "NEXT_PUBLIC_STRIPE_PK"
+    "STRIPE_PK",
+    "STRIPE_SK"
   ]
 }
