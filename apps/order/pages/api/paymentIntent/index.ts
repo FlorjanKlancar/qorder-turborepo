@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const stripe = require("stripe")(process.env.STRIPE_SK);
+  const stripe = require("stripe")(process.env.NEXT_STRIPE_SK);
 
   switch (req.method) {
     case "POST":
