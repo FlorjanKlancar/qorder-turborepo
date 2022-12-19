@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CartProvider from "../store/CartProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 function MyApp({ Component, pageProps }: any) {
   return <Component {...pageProps} />;
@@ -23,6 +24,7 @@ function MyAppWithProvider({
       <CartProvider>
         <MyApp Component={Component} pageProps={pageProps} />
       </CartProvider>
+      <Analytics />
     </QueryClientProvider>
   );
 }
