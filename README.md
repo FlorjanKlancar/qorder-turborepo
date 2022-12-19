@@ -1,73 +1,58 @@
-# Turborepo starter
+<div id="top"></div>
 
-This is an official npm starter turborepo.
+<h3 align="center">qOrder</h3>
+  <p align="center">
+    This app is demo application for food ordering in some restaurant.
+ 
+  </p>
+</div>
 
-## What's inside?
+<h3>Vercel Deploy: https://qorder-order.vercel.app/restaurant/1</h3>
 
-This turborepo uses [npm](https://www.npmjs.com/) as a package manager. It includes the following packages/apps:
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#information">Information</a></li>
+  </ol>
+</details>
 
-### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-### Utilities
+### Built With
 
-This turborepo has some additional tools already setup for you:
+* [Next.js](https://nextjs.org/)
+* [React.js](https://reactjs.org/)
+* [TurboRepo](https://turbo.build/)
+* [Tailwind CSS](https://tailwindcss.com/)
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
 
-### Build
 
-To build all apps and packages, run the following command:
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-```
-cd my-turborepo
-npm run build
-```
 
-### Develop
 
-To develop all apps and packages, run the following command:
 
-```
-cd my-turborepo
-npm run dev
-```
+## Information
+In this app it's possible to order and pay restaurants food by your mobile phone. After you finish your order, it pops up in admin dashboard.<br/>
+Admin dashboard also allowes you to have a bit of overview/statistics of how much orders you had in previous days etc.
 
-### Remote Caching
+In this project I have learned about:
+* Creating a more complex React application
+* Stripe payment functionality
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Pipelines](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+<p align="right">(<a href="#top">back to top</a>)</p>
